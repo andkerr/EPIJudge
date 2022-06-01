@@ -1,8 +1,26 @@
 #include "test_framework/generic_test.h"
+
 short Parity(unsigned long long x) {
-  // TODO - you fill in here.
-  return 0;
+  short res = 0;
+
+  while (x) {
+    res ^= (x & 1);
+    x >>= 1;
+  }
+
+  return res;
 }
+
+//short Parity(unsigned long long x) {
+//  short res = 0;
+//
+//  while (x) {
+//    res ^= (x & 1);
+//    x >>= 1;
+//  }
+//
+//  return res;
+//}
 
 int main(int argc, char* argv[]) {
   std::vector<std::string> args{argv + 1, argv + argc};
