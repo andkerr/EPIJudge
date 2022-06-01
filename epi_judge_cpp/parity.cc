@@ -4,8 +4,8 @@ short Parity(unsigned long long x) {
   short res = 0;
 
   while (x) {
-    res ^= (x & 1);
-    x >>= 1;
+    res ^= 1;
+    x &= (x - 1);
   }
 
   return res;
