@@ -1,6 +1,25 @@
 #include "test_framework/generic_test.h"
+
+int len(int x) {
+  return (int) floor(log10(x) + 1);
+}
+
+int digit(int x, int idx) {
+  return (int) (x / pow(10, idx)) % 10;
+}
+
 bool IsPalindromeNumber(int x) {
-  // TODO - you fill in here.
+  if (x < 0) {
+    return false;
+  }
+
+  int n_digits = len(x);
+  for (int i = 0; i < n_digits / 2; ++i) {
+    if (digit(x, i) != digit(x, n_digits - i - 1)) {
+      return false;
+    }
+  }
+
   return true;
 }
 
