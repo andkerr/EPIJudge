@@ -1,0 +1,31 @@
+Bit Tricks
+==========
+x & 1 => isolate the LSB of x
+
+Parity
+======
+- does a group of bits have an odd or even number of 1s ?
+  - odd 1s => parity 1
+  - even 1s => parity 0
+
+- example
+  - 1010 => parity 0
+  - 1110 => parity 1
+
+
+Two's Complement: Storing Signed Integers
+=========================================
+- n bits represent [-2^(n - 1), 2^(n - 1) - 1] (half the range goes to each of
+  positive and negative, taking one off the top to represent zero)
+
+- to represent -x, contstruct +x, invert each bit, and add one
+  - cool result: the MSB acts as a sign bit, 0 => (+) and 1 => (-)
+
+- addition and subtraction can be performed directly, ignoring overflow bits
+
+- example: +2 + (-2)
+
+  0 0 1 0
++ 1 1 1 0
+  -------
+1 0 0 0 0 = 0 (ignoring the overflow bit)

@@ -2448,6 +2448,6 @@ all: \
     $(BUILD_DIR)/zip_list
 
 clean:
-	rm -r $(BUILD_DIR)
+	rm -rvf $(BUILD_DIR) *.dSYM *.exe *.o
 
 .PHONY: all clean

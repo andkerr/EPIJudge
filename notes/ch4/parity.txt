@@ -1,5 +1,0 @@
-Parity
-
-- the number of 1s in a group of bits
-  - odd -> parity 1
-  - even -> parity 0
