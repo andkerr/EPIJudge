@@ -1,7 +1,15 @@
 #include "test_framework/generic_test.h"
+#include <cmath>
+
+// given: a double x, and and integer y
+// unknown: the double value that represents x raised to the y-th power
 double Power(double x, int y) {
-  // TODO - you fill in here.
-  return 0.0;
+  double res = 1.0;
+
+  for (int i = 0; i * i < y * y; ++i) {
+    res *= (y < 0) ? (1.0 / x) : x;
+  }
+  return res;
 }
 
 int main(int argc, char* argv[]) {
