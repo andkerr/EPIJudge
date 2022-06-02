@@ -44,7 +44,7 @@ problem_mapping = {
         },
         "4.03 Reverse bits": {
             "C++: reverse_bits.cc": {
-                "passed": 0,
+                "passed": 10000,
                 "total": 10000
             },
             "Java: ReverseBits.java": {
@@ -114,7 +114,7 @@ problem_mapping = {
         },
         "4.08 Reverse digits": {
             "C++: reverse_digits.cc": {
-                "passed": 0,
+                "passed": 19952,
                 "total": 19952
             },
             "Java: ReverseDigits.java": {
