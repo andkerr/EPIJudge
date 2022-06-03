@@ -15,14 +15,14 @@ void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr) {
   vector<Color>& A = *A_ptr;
   int lo = 0;
   int eq = 0;
-  int hi = A.size();
+  int hi = A.size() - 1;
   Color pivot = A[pivot_index];
-  while (eq < hi) {
+  while (eq <= hi) {
     if (A[eq] < pivot) {
       swap(A[lo++], A[eq++]);
     }
     else if (A[eq] > pivot) {
-      swap(A[eq], A[--hi]);
+      swap(A[eq], A[hi--]);
     }
     else {
       ++eq;
