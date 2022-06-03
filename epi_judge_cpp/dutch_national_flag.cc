@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <array>
 #include <vector>
 
@@ -5,12 +6,64 @@
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 using std::vector;
+using std::swap;
 enum class Color { kRed, kWhite, kBlue };
 
+// optimal, 1 pass
+//
 void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr) {
-  // TODO - you fill in here.
-  return;
+  vector<Color>& A = *A_ptr;
+  int lo = 0;
+  int eq = 0;
+  int hi = A.size();
+  Color pivot = A[pivot_index];
+  while (eq < hi) {
+    if (A[eq] < pivot) {
+      swap(A[lo++], A[eq++]);
+    }
+    else if (A[eq] > pivot) {
+      swap(A[eq], A[--hi]);
+    }
+    else {
+      ++eq;
+    }
+  }
 }
+
+// brute force - Treat this as two instances of partioning an array of two values.
+//               First, partition the array into [< pivot | >= pivot]. Then,
+//               operate on the rightmost section to separate elements that
+//               equal the pivot from those that are greater than the pivot.
+// void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr) {
+//   vector<Color>& A = *A_ptr;
+//   Color pivot = A[pivot_index];
+//   int lo = 0;
+//   int hi = A.size() - 1;
+//   while (lo < hi) {
+//     if (A[lo] >= pivot) {
+//       swap(A[lo], A[hi]);
+//       hi -= 1;
+//     }
+//     else {
+//       lo += 1;
+//     }
+//   }
+// 
+//   int eq = lo;
+//   hi = A.size() - 1;
+//   while (eq < hi) {
+//     if (A[eq] > pivot) {
+//       swap(A[eq], A[hi]);
+//       hi -= 1;
+//     }
+//     else {
+//       eq += 1;
+//     }
+//   }
+// 
+//   return;
+// }
+
 void DutchFlagPartitionWrapper(TimedExecutor& executor, const vector<int>& A,
                                int pivot_idx) {
   vector<Color> colors;
