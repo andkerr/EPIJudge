@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <functional>
 #include <iterator>
+#include <random>
 #include <vector>
 
 #include "test_framework/generic_test.h"
@@ -8,10 +9,46 @@
 #include "test_framework/timed_executor.h"
 using std::bind;
 using std::vector;
+using std::swap;
+
+// approach 2 - iterate i through [0, k - 1], choosing a random element from
+//              A[i, A.size() - 1] and swapping into the i-th position. For a,
+//              given iteration, the values in A[0, i - 1] have already been chosen.
+//
 void RandomSampling(int k, vector<int>* A_ptr) {
-  // TODO - you fill in here.
+  vector<int>& A = *A_ptr;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  int rand_idx;
+
+  for (int i = 0; i < k; ++i) {
+    std::uniform_int_distribution<> dist(i, A.size() - 1);
+    rand_idx = dist(gen);
+    swap(A[i], A[rand_idx]);
+  }
+
   return;
 }
+
+// approach 1 - erasing elements from A with uninform probability at each step.
+//              This solution is bogged down by the cost of erasing elements in
+//              the middle of A. See approach 2 for a solution that avoids this
+//              by using a swap operation.
+//void RandomSampling(int k, vector<int>* A_ptr) {
+//  vector<int>& A = *A_ptr;
+//  int del_idx;
+//
+//  std::random_device rd;
+//  std::mt19937 gen(rd());
+//  while (A.size() > k) {
+//    std::uniform_int_distribution<> dist(0, A.size() - 1);
+//    del_idx = dist(gen);
+//    A.erase(A.begin() + del_idx);
+//  }
+//
+//  return;
+//}
+
 bool RandomSamplingRunner(TimedExecutor& executor, int k, vector<int> A) {
   using namespace test_framework;
   vector<vector<int>> results;
@@ -37,8 +74,7 @@ bool RandomSamplingRunner(TimedExecutor& executor, int k, vector<int> A) {
                  find(begin(combinations), end(combinations), result)));
   }
   return CheckSequenceIsUniformlyRandom(sequence, total_possible_outcomes,
-                                        0.01);
-}
+                                        0.01); }
 
 void RandomSamplingWrapper(TimedExecutor& executor, int k,
                            const vector<int>& A) {
