@@ -8,7 +8,7 @@ SRC_DIR := .
 TEST_DATA_DIR := ../test_data
 
 # Modify this line if you want to pass custom arguments
-PROGRAM_ARGS := --test-data-dir $(TEST_DATA_DIR) 
+PROGRAM_ARGS := --test-data-dir $(TEST_DATA_DIR)
 
 CXX_COMPILER := g++
 CXX_FLAGS := -std=c++14 -pthread -Werror -Wno-unused-variable -Wno-sign-compare

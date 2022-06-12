@@ -2,6 +2,8 @@
 #include <functional>
 #include <iterator>
 #include <numeric>
+#include <random>
+#include <unordered_map>
 #include <vector>
 
 #include "test_framework/generic_test.h"
@@ -10,11 +12,62 @@
 using std::bind;
 using std::iota;
 using std::vector;
-// Returns a random k-sized subset of {0, 1, ..., n - 1}.
+
+// optimized - use a hash table to keep track of swapped indices only. This
+//             achieves better performance for k << n.
 vector<int> RandomSubset(int n, int k) {
-  // TODO - you fill in here.
-  return {};
+  std::unordered_map<int, int> swaps;
+  std::mt19937 gen((std::random_device())());
+  int idx;
+  for (int i = 0; i < k; ++i) {
+    idx = std::uniform_int_distribution<int> {i, n - 1}(gen);
+    auto it1 = swaps.find(i);
+    auto it2 = swaps.find(idx);
+    if (it1 == swaps.end() && it2 == swaps.end()) {
+      swaps[i] = idx;
+      swaps[idx] = i;
+    }
+    else if (it1 == swaps.end() && it2 != swaps.end()) {
+      swaps[i] = swaps[idx];
+      swaps[idx] = i;
+    }
+    else if (it1 != swaps.end() && it2 == swaps.end()) {
+      swaps[idx] = swaps[i];
+      swaps[i] = idx;
+    }
+    else {
+      int tmp = swaps[i];
+      swaps[i] = swaps[idx];
+      swaps[idx] = tmp;
+    }
+  }
+
+  vector<int> result;
+  for (int i = 0; i < k; ++i) {
+    result.push_back(swaps[i]);
+  }
+
+  return result;
 }
+
+// naive initial solution - initialize and array of values [0...n-1], and store
+//                          a subset by swapping into the first k elements. This
+//                          requires O(n) space and O(n) time to create the initial
+//                          array, and O(k) time to construct the subset. We can
+//                          do better!
+//vector<int> RandomSubset(int n, int k) {
+//  vector<int> nums;
+//  for (int i = 0; i < n; ++i) {
+//    nums.push_back(i);
+//  }
+//
+//  std::mt19937 gen((std::random_device())());
+//  for (int i = 0; i < k; ++i) {
+//    std::swap(nums[i], nums[std::uniform_int_distribution<int> {i, n - 1}(gen)]);
+//  }
+//
+//  return vector<int>(nums.begin(), nums.begin() + k);
+//}
 bool RandomSubsetRunner(TimedExecutor& executor, int n, int k) {
   using namespace test_framework;
   vector<vector<int>> results;
