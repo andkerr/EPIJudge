@@ -1,3 +1,4 @@
+#include <cmath>
 #include <string>
 
 #include "test_framework/generic_test.h"
@@ -5,13 +6,44 @@
 using std::string;
 
 string IntToString(int x) {
-  // TODO - you fill in here.
-  return "0";
+  string result;
+  if (x == 0) {
+    return "0";
+  }
+
+  if (x < 0) {
+    result.push_back('-');
+    x = -x;
+  }
+
+  int n_digits = (int) floor(log10(x)) + 1;
+  int d;
+  for (int i = 0; i < n_digits; ++i) {
+    d = (int) (x / (int) pow(10, n_digits - i - 1)) % 10;
+    result.push_back(d + '0');
+  }
+
+  return result;
 }
+
 int StringToInt(const string& s) {
-  // TODO - you fill in here.
-  return 0;
+  int result = 0;
+  bool neg = false;
+  for (char c : s) {
+    if (c == '-') {
+      neg = true;
+    }
+    else if (c == '+') {
+      neg = false;
+    }
+    else {
+      result = (result * 10) + (c - '0');
+    }
+  }
+
+  return neg ? -result : result;
 }
+
 void Wrapper(int x, const string& s) {
   if (stoi(IntToString(x)) != x) {
     throw TestFailure("Int to string conversion failed");
