@@ -1,4 +1,5 @@
 #include <cmath>
+#include <limits>
 #include <string>
 
 #include "test_framework/generic_test.h"
@@ -9,6 +10,10 @@ string IntToString(int x) {
   string result;
   if (x == 0) {
     return "0";
+  }
+
+  if (x == std::numeric_limits<int>::min()) {
+      return "-2147483648";
   }
 
   if (x < 0) {
