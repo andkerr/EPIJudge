@@ -200,7 +200,7 @@ problem_mapping = {
         },
         "5.02 Increment an arbitrary-precision integer": {
             "C++: int_as_array_increment.cc": {
-                "passed": 0,
+                "passed": 505,
                 "total": 505
             },
             "Java: IntAsArrayIncrement.java": {
@@ -214,7 +214,7 @@ problem_mapping = {
         },
         "5.03 Multiply two arbitrary-precision integers": {
             "C++: int_as_array_multiply.cc": {
-                "passed": 0,
+                "passed": 1000,
                 "total": 1000
             },
             "Java: IntAsArrayMultiply.java": {
@@ -242,7 +242,7 @@ problem_mapping = {
         },
         "5.05 Delete duplicates from a sorted array": {
             "C++: sorted_array_remove_dups.cc": {
-                "passed": 0,
+                "passed": 2003,
                 "total": 2003
             },
             "Java: SortedArrayRemoveDups.java": {
@@ -312,7 +312,7 @@ problem_mapping = {
         },
         "5.10 Permute the elements of an array": {
             "C++: apply_permutation.cc": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Java: ApplyPermutation.java": {
@@ -382,7 +382,7 @@ problem_mapping = {
         },
         "5.15 Compute a random subset": {
             "C++: random_subset.cc": {
-                "passed": 0,
+                "passed": 9,
                 "total": 9
             },
             "Java: RandomSubset.java": {
@@ -410,7 +410,7 @@ problem_mapping = {
         },
         "5.17 The Sudoku checker problem": {
             "C++: is_valid_sudoku.cc": {
-                "passed": 0,
+                "passed": 745,
                 "total": 745
             },
             "Java: IsValidSudoku.java": {
@@ -424,7 +424,7 @@ problem_mapping = {
         },
         "5.18 Compute the spiral ordering of a 2D array": {
             "C++: spiral_ordering.cc": {
-                "passed": 0,
+                "passed": 51,
                 "total": 51
             },
             "Java: SpiralOrdering.java": {
@@ -482,7 +482,7 @@ problem_mapping = {
         },
         "6.01 Interconvert strings and integers": {
             "C++: string_integer_interconversion.cc": {
-                "passed": 0,
+                "passed": 15002,
                 "total": 15002
             },
             "Java: StringIntegerInterconversion.java": {
@@ -524,7 +524,7 @@ problem_mapping = {
         },
         "6.04 Replace and remove": {
             "C++: replace_and_remove.cc": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             },
             "Java: ReplaceAndRemove.java": {
