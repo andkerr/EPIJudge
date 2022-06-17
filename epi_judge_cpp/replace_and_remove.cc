@@ -8,8 +8,33 @@ using std::string;
 using std::vector;
 
 int ReplaceAndRemove(int size, char s[]) {
-  // TODO - you fill in here.
-  return 0;
+  int slow = 0;
+  int num_a = 0;
+
+  for (int i = 0; i < size; ++i) {
+    if (s[i] != 'b') {
+      s[slow] = s[i];
+      ++slow;
+    }
+    if (s[i] == 'a') {
+      ++num_a;
+    }
+  }
+
+  slow -= 1;
+  int back = slow + num_a;
+  int final_size = back + 1;
+  for ( ; slow >= 0; --slow) {
+    if (s[slow] == 'a') {
+      s[back--] = 'd';
+      s[back--] = 'd';
+    }
+    else {
+      s[back--] = s[slow];
+    }
+  }
+
+  return final_size;
 }
 vector<string> ReplaceAndRemoveWrapper(TimedExecutor& executor, int size,
                                        const vector<string>& s) {
